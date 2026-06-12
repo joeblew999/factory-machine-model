@@ -1,6 +1,6 @@
 [package]
 name = "factory-machine-model"
-version = "0.2.0"
+version = "0.3.0"
 edition = "2021"
 license = "MIT OR Apache-2.0"
 description = "The gateway⇄driver contract for factory-floor OPC-UA automation, modelled on OPC UA for Machinery (OPC 40001-1) and OPC UA for ISA-95 Job Control (OPC 10031-4)"
@@ -10,4 +10,5 @@ categories = ["api-bindings", "embedded"]
 
 [dependencies]
 anyhow = "1"
+async-trait = "0.1"
 serde = { version = "1", features = ["derive"] }

@@ -16,11 +16,13 @@
 //! depends only on this trait — never on a concrete driver — which is what lets
 //! each driver be an independently-versioned crate composed per factory.
 
+pub mod dyn_driver;
 pub mod identification;
 pub mod job;
 pub mod state;
 pub mod telemetry;
 
+pub use dyn_driver::{BoxedDriver, DynMachineDriver};
 pub use identification::Identification;
 pub use job::{JobOrder, JobParameter, JobState};
 pub use state::{MachineryItemState, OperationMode};
