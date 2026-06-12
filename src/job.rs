@@ -67,39 +67,44 @@ pub enum ParameterValue {
     Bytes(Vec<u8>),
 }
 
-/// Job-order lifecycle state (ISA-95 Job Control). The gateway advances an order
-/// through these as the driver works it.
+/// Job-order lifecycle state, using the ISA-95 Job Control state names
+/// (OPC 10031-4): `Store` lands an order in `NotAllowedToStart`; `Start` /
+/// `StoreAndStart` move it to `AllowedToStart`; execution begins → `Running`;
+/// `Pause` → `Interrupted`; it ends `Completed` or `Aborted`.
+///
+/// In a fully-conformant server these are carried as `ISA95StateDataType`
+/// (BrowseName + StateText + StateNumber); here we model the lifecycle directly.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 pub enum JobState {
-    /// Stored in the receiver, not yet started.
-    Stored,
-    /// Queued and allowed to start.
-    Queued,
+    /// Stored in the receiver, not yet permitted to run.
+    NotAllowedToStart,
+    /// Permitted to run; will execute when the machine is ready.
+    AllowedToStart,
     /// Currently executing on the machine.
     Running,
-    /// Paused, resumable.
+    /// Paused (after `Pause`), resumable via `Resume`.
     Interrupted,
     /// Finished successfully.
-    Ended,
-    /// Aborted / cancelled before completion.
+    Completed,
+    /// Aborted / cancelled / stopped before completion.
     Aborted,
 }
 
 impl JobState {
     pub fn as_str(&self) -> &'static str {
         match self {
-            JobState::Stored => "Stored",
-            JobState::Queued => "Queued",
+            JobState::NotAllowedToStart => "NotAllowedToStart",
+            JobState::AllowedToStart => "AllowedToStart",
             JobState::Running => "Running",
             JobState::Interrupted => "Interrupted",
-            JobState::Ended => "Ended",
+            JobState::Completed => "Completed",
             JobState::Aborted => "Aborted",
         }
     }
 
     /// Terminal states no longer eligible for execution.
     pub fn is_terminal(&self) -> bool {
-        matches!(self, JobState::Ended | JobState::Aborted)
+        matches!(self, JobState::Completed | JobState::Aborted)
     }
 }
 
@@ -116,7 +121,7 @@ mod tests {
 
     #[test]
     fn terminal_states() {
-        assert!(JobState::Ended.is_terminal());
+        assert!(JobState::Completed.is_terminal());
         assert!(!JobState::Running.is_terminal());
     }
 }
