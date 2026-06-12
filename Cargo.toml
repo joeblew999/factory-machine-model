@@ -1,0 +1,12 @@
+[package]
+name = "factory-machine-model"
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+description = "Standard machine model — the gateway⇄driver contract for factory-floor OPC-UA automation"
+repository = "https://github.com/joeblew999/factory-machine-model"
+keywords = ["opc-ua", "automation", "factory", "scada", "industrial"]
+categories = ["api-bindings", "embedded"]
+
+[dependencies]
+anyhow = "1"
