@@ -1,5 +1,7 @@
 # factory-machine-model
 
+<https://github.com/joeblew999/factory-machine-model>
+
 The **gateway⇄driver contract** for factory-floor automation — the small, stable
 crate that lets one generic OPC-UA gateway serve many machine types (roll-formers,
 robots, CNCs) and lets SCADA speak to all of them without knowing what any of
