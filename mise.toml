@@ -1,0 +1,13 @@
+#:schema https://mise.jdx.dev/schema/mise.json
+# factory-machine-model — library crate (no binary). Verify-only CI: `mise run ci` = cargo test,
+# identical locally and on the GitHub matrix. Consumes joeblew999/.github tasks
+# by reference. Rust is owned by rust-toolchain.toml (rustup), never mise.
+[task_config]
+includes = [
+  "git::https://github.com/joeblew999/.github.git//tasks/mise.toml?ref=v0.63.0",
+  "git::https://github.com/joeblew999/.github.git//tasks/ci.toml?ref=v0.63.0",
+  "git::https://github.com/joeblew999/.github.git//tasks/tool-rust.toml?ref=v0.63.0",
+]
+
+[tasks.ci]
+depends = ["rust:test"]
