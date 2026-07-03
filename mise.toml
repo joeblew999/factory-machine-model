@@ -4,9 +4,9 @@
 # by reference. Rust is owned by rust-toolchain.toml (rustup), never mise.
 [task_config]
 includes = [
-  "git::https://github.com/joeblew999/.github.git//tasks/mise.toml?ref=v0.63.0",
-  "git::https://github.com/joeblew999/.github.git//tasks/ci.toml?ref=v0.63.0",
-  "git::https://github.com/joeblew999/.github.git//tasks/tool-rust.toml?ref=v0.63.0",
+  "git::https://github.com/joeblew999/.github.git//tasks/mise.toml?ref=v0.67.1",
+  "git::https://github.com/joeblew999/.github.git//tasks/ci.toml?ref=v0.67.1",
+  "git::https://github.com/joeblew999/.github.git//tasks/tool-rust.toml?ref=v0.67.1",
 ]
 
 [tasks.ci]
