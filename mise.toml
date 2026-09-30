@@ -1,17 +1,7 @@
-#:schema https://mise.jdx.dev/schema/mise.json
-# factory-machine-model — library crate (no binary). Verify-only CI: `mise run ci` = cargo test,
-# identical locally and on the GitHub matrix. Consumes joeblew999/.github tasks
-# by reference. Rust is owned by rust-toolchain.toml (rustup), never mise.
+# Project-local tasks only. See MISE-RETIREMENT.md for retired workflows and prerequisites.
+# Shared workflow experiment retired; see MISE-RETIREMENT.md.
+
 [settings]
 # rust-toolchain.toml is the Rust pin; this makes `mise install` honour it.
 idiomatic_version_file_enable_tools = ["rust"]
 
-[task_config]
-includes = [
-  "git::https://github.com/joeblew999/.github.git//tasks/mise.toml?ref=v0.67.1",
-  "git::https://github.com/joeblew999/.github.git//tasks/ci.toml?ref=v0.67.1",
-  "git::https://github.com/joeblew999/.github.git//tasks/tool-rust.toml?ref=v0.67.1",
-]
-
-[tasks.ci]
-depends = ["rust:test"]
